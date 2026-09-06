@@ -48,21 +48,53 @@ function getPillLabel(kind: 'placement' | 'completion', state: string): string {
 export default function RequestTracker({ onBack }: { onBack: () => void }) {
     const [requests, setRequests] = useState<TrackedRequest[]>([]);
     const [loading, setLoading] = useState(true);
+    const [cancellingId, setCancellingId] = useState<number | null>(null);
+
+    const loadRequests = async () => {
+        setLoading(true);
+        try {
+            const result = await internshipApi.trackRequests();
+            setRequests(Array.isArray(result?.data) ? result.data : []);
+        } catch (err) {
+            notify.error(err instanceof Error ? err.message : 'Could not load requests.');
+            setRequests([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        (async () => {
-            setLoading(true);
-            try {
-                const result = await internshipApi.trackRequests();
-                setRequests(Array.isArray(result?.data) ? result.data : []);
-            } catch (err) {
-                notify.error(err instanceof Error ? err.message : 'Could not load requests.');
-                setRequests([]);
-            } finally {
-                setLoading(false);
-            }
-        })();
+        void loadRequests();
     }, []);
+
+    const handleCancel = async (req: TrackedRequest) => {
+        const ok = await notify.confirm(
+            'Are you sure you want to cancel this request? This cannot be undone.',
+            { title: 'Cancel Request?', confirmLabel: 'Yes, Cancel', danger: true },
+        );
+        if (!ok) return;
+
+        const reason = await notify.prompt(
+            'You can optionally tell us why (this is not required).',
+            { title: 'Reason for Cancelling (optional)', confirmLabel: 'Cancel Request', placeholder: 'e.g. Changed my mind, submitted by mistake…', allowEmpty: true },
+        );
+        if (reason === null) return;
+
+        setCancellingId(req.id);
+        try {
+            if (req.request_kind === 'completion') {
+                await internshipApi.performAction(req.id, 'cancel', reason);
+            } else {
+                await internshipApi.performPlacementAction(req.id, 'cancel', reason);
+            }
+            notify.success('Request cancelled.');
+            await loadRequests();
+        } catch (err) {
+            notify.error(err instanceof Error ? err.message : 'Could not cancel this request.');
+        } finally {
+            setCancellingId(null);
+        }
+    };
 
     return (
         <div className="tracker-layout">
@@ -91,7 +123,8 @@ export default function RequestTracker({ onBack }: { onBack: () => void }) {
             {!loading && requests.map((req) => {
                 const isCompletion = req.request_kind === 'completion';
                 const isRejected = req.state === 'rejected';
-                const currentIndex = isRejected ? -1 : getCompletionStepIndex(req.state);
+                const isCancelled = req.state === 'cancelled';
+                const currentIndex = isRejected || isCancelled ? -1 : getCompletionStepIndex(req.state);
 
                 return (
                     <div key={`${req.request_kind}-${req.id}`} className="wizard-card">
@@ -105,9 +138,22 @@ export default function RequestTracker({ onBack }: { onBack: () => void }) {
                                     {req.request_date && <span><CalendarDays size={12} style={{ verticalAlign: 'middle', marginRight: '3px' }} />{req.request_date}</span>}
                                 </p>
                             </div>
-                            <span className={`status-pill ${getPillClass(req.state)}`}>
-                                {getPillLabel(req.request_kind, req.state)}
-                            </span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                {req.state === 'submitted' && (
+                                    <button
+                                        type="button"
+                                        className="btn-secondary"
+                                        style={{ fontSize: '0.8rem', padding: '5px 12px' }}
+                                        disabled={cancellingId === req.id}
+                                        onClick={() => handleCancel(req)}
+                                    >
+                                        {cancellingId === req.id ? 'Cancelling…' : 'Cancel Request'}
+                                    </button>
+                                )}
+                                <span className={`status-pill ${getPillClass(req.state)}`}>
+                                    {getPillLabel(req.request_kind, req.state)}
+                                </span>
+                            </div>
                         </div>
 
                         <div style={{ display: 'flex', gap: '24px', padding: '10px 0', borderTop: '1px solid var(--portal-border)', borderBottom: '1px solid var(--portal-border)', margin: '12px 0', fontSize: '0.85rem', color: 'var(--portal-text-muted)', flexWrap: 'wrap' }}>
@@ -119,7 +165,7 @@ export default function RequestTracker({ onBack }: { onBack: () => void }) {
                             {req.internship_end_date && <span><strong>End:</strong> {req.internship_end_date}</span>}
                         </div>
 
-                        {isCompletion && !isRejected && (
+                        {isCompletion && !isRejected && !isCancelled && (
                             <div className="stepper" style={{ marginTop: '16px' }}>
                                 {COMPLETION_STEPS.map((label, index) => (
                                     <div key={label} className={`step ${index <= currentIndex ? 'completed' : ''}`}>
@@ -148,6 +194,17 @@ export default function RequestTracker({ onBack }: { onBack: () => void }) {
                                     {isCompletion
                                         ? 'Your internship completion certificate has been collected.'
                                         : 'Your Letter of Internship has been collected. Once your internship is finished, you can submit a Completion Request for your certificate.'}
+                                </p>
+                            </div>
+                        )}
+
+                        {req.state === 'cancelled' && (
+                            <div className="notice-box notice-neutral" style={{ marginTop: '16px' }}>
+                                <h4 style={{ margin: '0 0 6px' }}>Cancelled</h4>
+                                <p className="notice-text muted" style={{ margin: 0 }}>
+                                    {req.rejection_reason
+                                        ? <><strong>Reason:</strong> {req.rejection_reason}</>
+                                        : 'You cancelled this request.'}
                                 </p>
                             </div>
                         )}

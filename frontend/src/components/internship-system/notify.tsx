@@ -25,6 +25,8 @@ export type PromptOptions = {
     title?: string;
     confirmLabel?: string;
     cancelLabel?: string;
+    placeholder?: string;
+    allowEmpty?: boolean;
 };
 
 type PromptState = PromptOptions & {
@@ -99,6 +101,8 @@ export const notify = {
                 title: options.title,
                 confirmLabel: options.confirmLabel,
                 cancelLabel: options.cancelLabel,
+                placeholder: options.placeholder,
+                allowEmpty: options.allowEmpty,
                 resolve,
             };
             if (bus.promptHandler) {
@@ -186,6 +190,8 @@ export function PromptModal({
     message,
     confirmLabel = 'Submit',
     cancelLabel = 'Cancel',
+    placeholder,
+    allowEmpty = false,
     onConfirm,
     onCancel,
 }: {
@@ -194,6 +200,8 @@ export function PromptModal({
     message: string;
     confirmLabel?: string;
     cancelLabel?: string;
+    placeholder?: string;
+    allowEmpty?: boolean;
     onConfirm: (val: string) => void;
     onCancel: () => void;
 }) {
@@ -231,9 +239,10 @@ export function PromptModal({
                     type="text"
                     value={val}
                     onChange={(e) => setVal(e.target.value)}
+                    placeholder={placeholder}
                     autoFocus
                     onKeyDown={(e) => {
-                        if (e.key === 'Enter' && val.trim()) onConfirm(val);
+                        if (e.key === 'Enter' && (allowEmpty || val.trim())) onConfirm(val);
                     }}
                     style={{ width: '100%', padding: '10px', marginTop: '10px', marginBottom: '20px', border: '1px solid #cbd5e1', borderRadius: '6px', outline: 'none' }}
                 />
@@ -245,7 +254,7 @@ export function PromptModal({
                         type="button"
                         className="btn-primary"
                         onClick={() => onConfirm(val)}
-                        disabled={!val.trim()}
+                        disabled={!allowEmpty && !val.trim()}
                     >
                         {confirmLabel}
                     </button>
@@ -357,6 +366,8 @@ export function ToastHost() {
                 message={prompt?.message || ''}
                 confirmLabel={prompt?.confirmLabel || 'Submit'}
                 cancelLabel={prompt?.cancelLabel || 'Cancel'}
+                placeholder={prompt?.placeholder}
+                allowEmpty={prompt?.allowEmpty}
                 onConfirm={(val) => closePrompt(val)}
                 onCancel={() => closePrompt(null)}
             />

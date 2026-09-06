@@ -126,7 +126,7 @@ class InternshipPlacementAPI(http.Controller):
         if not req:
             return api_error('Not found', 404)
         if action == 'cancel' and role == 'student':
-            req.action_cancel()
+            req.action_cancel(reason=params.get('reason', ''))
         elif action == 'approve' and role in ('dean', 'admin'):
             req.action_approve()
         elif action == 'reject' and role in ('dean', 'admin'):

@@ -51,5 +51,7 @@ class InternshipRequest(models.Model):
         self.state = 'rejected'
         self.rejection_reason = reason
 
-    def action_cancel(self):
+    def action_cancel(self, reason=''):
         self.state = 'cancelled'
+        if reason:
+            self.rejection_reason = reason

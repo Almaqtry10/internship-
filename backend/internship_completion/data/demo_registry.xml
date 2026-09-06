@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="param_bootstrap_password" model="ir.config_parameter">
+            <field name="key">internship_completion.bootstrap_password</field>
+            <field name="value">1234</field>
+        </record>
+
+        <!-- Shared "2026 batch" cohort — same student IDs and names as
+             bu_clearance and Recommendation, one per faculty, so a demo can
+             follow the same person across every system. Faculty/department
+             are NOT stored here — they're resolved live from bu_clearance's
+             registry (see services/student_identity.py); this registry only
+             tracks internship-specific dates. -->
+        <record id="demo_student_md2026001" model="internship.student.registry">
+            <field name="student_id">MD2026001</field>
+            <field name="full_name">Ahmed Yusuf Ibrahim</field>
+            <field name="dob">2000-03-12</field>
+            <field name="place_of_birth">Mogadishu</field>
+            <field name="phone">+252 61 200 6001</field>
+            <field name="email">md2026001@student.bu.edu.so</field>
+            <field name="enrolled_date">2021-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-01</field>
+            <field name="internship_end_date">2027-06-30</field>
+            <field name="degree">Bachelor</field>
+        </record>
+
+        <record id="demo_student_hs2026002" model="internship.student.registry">
+            <field name="student_id">HS2026002</field>
+            <field name="full_name">Amina Hassan Omar</field>
+            <field name="dob">2000-07-22</field>
+            <field name="place_of_birth">Mogadishu</field>
+            <field name="phone">+252 61 200 6002</field>
+            <field name="email">hs2026002@student.bu.edu.so</field>
+            <field name="enrolled_date">2021-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-01</field>
+            <field name="internship_end_date">2027-01-31</field>
+            <field name="degree">Bachelor</field>
+        </record>
+
+        <record id="demo_student_eng2026003" model="internship.student.registry">
+            <field name="student_id">ENG2026003</field>
+            <field name="full_name">Abdiwali Mohamed Hassan</field>
+            <field name="dob">1999-11-05</field>
+            <field name="place_of_birth">Kismayo</field>
+            <field name="phone">+252 61 200 6003</field>
+            <field name="email">eng2026003@student.bu.edu.so</field>
+            <field name="enrolled_date">2021-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-15</field>
+            <field name="internship_end_date">2026-12-15</field>
+            <field name="degree">Bachelor</field>
+        </record>
+
+        <record id="demo_student_cs2026004" model="internship.student.registry">
+            <field name="student_id">CS2026004</field>
+            <field name="full_name">Naima Abdurisak Ahmed</field>
+            <field name="dob">2001-01-18</field>
+            <field name="place_of_birth">Mogadishu</field>
+            <field name="phone">+252 61 200 6004</field>
+            <field name="email">cs2026004@student.bu.edu.so</field>
+            <field name="enrolled_date">2021-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-01</field>
+            <field name="internship_end_date">2026-10-01</field>
+            <field name="degree">Bachelor</field>
+        </record>
+
+        <record id="demo_student_eco2026005" model="internship.student.registry">
+            <field name="student_id">ECO2026005</field>
+            <field name="full_name">Hassan Ali Nur</field>
+            <field name="dob">2000-09-09</field>
+            <field name="place_of_birth">Baidoa</field>
+            <field name="phone">+252 61 200 6005</field>
+            <field name="email">eco2026005@student.bu.edu.so</field>
+            <field name="enrolled_date">2021-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-01</field>
+            <field name="internship_end_date">2026-12-31</field>
+            <field name="degree">Bachelor</field>
+        </record>
+
+        <record id="demo_student_sh2026006" model="internship.student.registry">
+            <field name="student_id">SH2026006</field>
+            <field name="full_name">Fatima Ali Mohamed</field>
+            <field name="dob">2000-04-27</field>
+            <field name="place_of_birth">Mogadishu</field>
+            <field name="phone">+252 61 200 6006</field>
+            <field name="email">sh2026006@student.bu.edu.so</field>
+            <field name="enrolled_date">2021-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-01</field>
+            <field name="internship_end_date">2026-12-31</field>
+            <field name="degree">Bachelor</field>
+        </record>
+
+        <record id="demo_student_agr2026007" model="internship.student.registry">
+            <field name="student_id">AGR2026007</field>
+            <field name="full_name">Omar Abdi Hassan</field>
+            <field name="dob">1999-12-30</field>
+            <field name="place_of_birth">Afgooye</field>
+            <field name="phone">+252 61 200 6007</field>
+            <field name="email">agr2026007@student.bu.edu.so</field>
+            <field name="enrolled_date">2021-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-01</field>
+            <field name="internship_end_date">2026-12-31</field>
+            <field name="degree">Bachelor</field>
+        </record>
+
+        <record id="demo_student_edu2026008" model="internship.student.registry">
+            <field name="student_id">EDU2026008</field>
+            <field name="full_name">Hodan Mohamed Farah</field>
+            <field name="dob">2000-06-14</field>
+            <field name="place_of_birth">Mogadishu</field>
+            <field name="phone">+252 61 200 6008</field>
+            <field name="email">edu2026008@student.bu.edu.so</field>
+            <field name="enrolled_date">2021-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-01</field>
+            <field name="internship_end_date">2026-12-31</field>
+            <field name="degree">Bachelor</field>
+        </record>
+
+        <record id="demo_student_soc2026009" model="internship.student.registry">
+            <field name="student_id">SOC2026009</field>
+            <field name="full_name">Yusuf Abdi Mohamed</field>
+            <field name="dob">2000-02-02</field>
+            <field name="place_of_birth">Mogadishu</field>
+            <field name="phone">+252 61 200 6009</field>
+            <field name="email">soc2026009@student.bu.edu.so</field>
+            <field name="enrolled_date">2021-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-01</field>
+            <field name="internship_end_date">2026-12-31</field>
+            <field name="degree">Bachelor</field>
+        </record>
+
+        <record id="demo_student_vet2026010" model="internship.student.registry">
+            <field name="student_id">VET2026010</field>
+            <field name="full_name">Sahra Omar Ismail</field>
+            <field name="dob">2000-10-19</field>
+            <field name="place_of_birth">Beledweyne</field>
+            <field name="phone">+252 61 200 6010</field>
+            <field name="email">vet2026010@student.bu.edu.so</field>
+            <field name="enrolled_date">2021-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-01</field>
+            <field name="internship_end_date">2027-06-30</field>
+            <field name="degree">Bachelor</field>
+        </record>
+
+        <record id="demo_student_mar2026011" model="internship.student.registry">
+            <field name="student_id">MAR2026011</field>
+            <field name="full_name">Khadija Abdi Yusuf</field>
+            <field name="dob">2001-05-03</field>
+            <field name="place_of_birth">Kismayo</field>
+            <field name="phone">+252 61 200 6011</field>
+            <field name="email">mar2026011@student.bu.edu.so</field>
+            <field name="enrolled_date">2021-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-01</field>
+            <field name="internship_end_date">2026-12-31</field>
+            <field name="degree">Bachelor</field>
+        </record>
+
+        <record id="demo_student_geo2026012" model="internship.student.registry">
+            <field name="student_id">GEO2026012</field>
+            <field name="full_name">Salman Isse Adan</field>
+            <field name="dob">2000-08-08</field>
+            <field name="place_of_birth">Mogadishu</field>
+            <field name="phone">+252 61 200 6012</field>
+            <field name="email">geo2026012@student.bu.edu.so</field>
+            <field name="enrolled_date">2021-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-01</field>
+            <field name="internship_end_date">2026-12-31</field>
+            <field name="degree">Bachelor</field>
+        </record>
+
+        <record id="demo_student_den2026013" model="internship.student.registry">
+            <field name="student_id">DEN2026013</field>
+            <field name="full_name">Maryan Yusuf Ali</field>
+            <field name="dob">2000-01-25</field>
+            <field name="place_of_birth">Mogadishu</field>
+            <field name="phone">+252 61 200 6013</field>
+            <field name="email">den2026013@student.bu.edu.so</field>
+            <field name="enrolled_date">2020-09-01</field>
+            <field name="graduated_date">2026-06-30</field>
+            <field name="internship_start_date">2026-07-01</field>
+            <field name="internship_end_date">2027-06-30</field>
+            <field name="degree">Bachelor</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,43 @@
+# Dependencies & build
+node_modules/
+frontend/node_modules/
+frontend/dist/
+*.tsbuildinfo
+*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Editor / agent
+.vscode/
+.idea/
+.cursor/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local leftovers / dev-only scripts, not part of the addon
+_recovery/
+query
+start
+stop
+run_hook.py
+test_hook.py
+test_registry.py
+update_users.py

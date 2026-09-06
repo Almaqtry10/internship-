@@ -1,0 +1,105 @@
+﻿/* styles/login.css — demo login only; skip when embedding in host dashboards */
+
+/* ==========================================================
+   9. LOGIN
+========================================================== */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--portal-bg);
+    font-family: var(--font-body);
+}
+.login-card {
+    background: var(--portal-surface);
+    border: 1px solid var(--portal-border);
+    padding: 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    color: var(--portal-text);
+}
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.login-header h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--portal-text);
+}
+.login-header p {
+    margin: 0;
+    color: var(--portal-text-muted);
+    font-size: 0.95rem;
+}
+.login-form .input-group {
+    margin-bottom: 20px;
+}
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--portal-text-muted);
+}
+.login-input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--portal-surface);
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    color: var(--portal-text);
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+.login-input:focus {
+    outline: none;
+    border-color: #2b6cb0;
+    box-shadow: 0 0 0 2px rgba(43, 108, 176, 0.2);
+}
+
+.login-error {
+    background: #fef2f2;
+    color: #991b1b;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    border: 1px solid #f87171;
+}
+
+.login-submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #2b6cb0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+.login-submit-btn:hover {
+    background: #1a365d;
+}
+.login-submit-btn.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+/* Ensure main layout can handle full screen login */
+.clearance-container.is-logged-in {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.clearance-container {
+    min-height: 100vh;
+}

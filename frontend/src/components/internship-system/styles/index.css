@@ -1,0 +1,6 @@
+/* styles/index.css — full demo SPA (all roles + login) */
+@import './tokens.css';
+@import './shared.css';
+@import './student.css';
+@import './staff.css';
+@import './login.css';

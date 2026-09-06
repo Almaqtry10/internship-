@@ -1,0 +1,111 @@
+/* Internship-only form extras not present in the shared Recommendation styles. */
+
+.upload-drop-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 28px 20px;
+    border: 2px dashed var(--portal-border);
+    border-radius: 14px;
+    background: var(--portal-bg);
+    cursor: pointer;
+    text-align: center;
+    color: var(--portal-text-muted);
+    transition: border-color 0.2s, background 0.2s;
+}
+.upload-drop-zone:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-soft, rgba(15, 78, 168, 0.04));
+}
+.upload-drop-zone span {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--portal-text);
+}
+.upload-drop-zone small {
+    font-size: 0.78rem;
+}
+.upload-drop-icon {
+    opacity: 0.4;
+}
+
+.upload-success-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    background: #f0fdf4;
+}
+[data-theme="dark"] .upload-success-bar {
+    background: rgba(22, 163, 74, 0.1);
+    border-color: rgba(22, 163, 74, 0.3);
+}
+.upload-success-icon {
+    color: #16a34a;
+    flex-shrink: 0;
+}
+.upload-success-name {
+    flex: 1;
+    font-size: 0.88rem;
+    color: #166534;
+    word-break: break-all;
+}
+[data-theme="dark"] .upload-success-name {
+    color: #86efac;
+}
+.upload-remove-btn {
+    background: none;
+    border: none;
+    color: #dc2626;
+    cursor: pointer;
+    font-size: 0.82rem;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+.upload-remove-btn:hover {
+    background: rgba(220, 38, 38, 0.08);
+}
+
+.password-modal-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 12px 0 20px;
+}
+.password-modal-fields label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--portal-text-muted);
+}
+.password-modal-fields input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid var(--portal-border, #cbd5e1);
+    border-radius: 6px;
+    font: inherit;
+    background: var(--portal-surface, #fff);
+    color: var(--portal-text, #0f172a);
+    outline: none;
+}
+
+.staff-report-print-bar {
+    display: flex;
+    gap: 10px;
+    margin: 16px 0 20px;
+}
+
+.staff-report-presets {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
